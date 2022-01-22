@@ -1,0 +1,31 @@
+.infos-container
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  min-width: 1000px
+  max-width: 1200px
+  div
+    width: calc(50% - 20px)
+
+.dashboard-container
+  display: flex
+  flex-direction: column
+  .title-container
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    width: 100%
+    .title
+      font-family: 'Raleway', serif
+
+
+@media (max-width: 1050px)
+  .infos-container
+    min-width: 0
+
+@media (max-width: 520px)
+  .infos-container
+    display: block
+    min-width: 0
+    div
+      width: 100%

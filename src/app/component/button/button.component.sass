@@ -1,0 +1,210 @@
+@import "../../../styles"
+@import "../../app.component"
+
+button 
+  margin: 5px auto
+
+.disabled
+  background-color: gray!important
+
+.mid-width
+  width: 50%
+
+:host-context(.yellow) button
+  background-color: goldenrod
+  color: white
+
+:host-context(.small) button 
+  margin: 5px
+  width: calc(50% - 10px)
+  font-size: 10.5px
+
+:host-context(.medium) button 
+  margin: 5px
+  width: calc(50% - 10px)
+  font-size: 12px
+
+:host-context(.full-width) button 
+  margin: 5px
+  width: calc(100% - 10px)
+
+:host-context(.colored) button 
+  background-color: #C3A23F
+
+:host-context(.primary) button
+  background-color: $primaryColor
+  color: white
+
+:host-context(.white) button, mat-icon 
+  color: white
+
+:host-context(.nav-button) mat-icon 
+  font-size: 30px
+
+:host-context(.transparent) button 
+  background-color: rgba(255,255,255,0.1)
+
+:host-context(.navbar-button) button 
+  float: left
+  width: 200px
+  margin: 0 auto
+  height: 100%
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
+  font-family: "Malgun Gothic", serif
+  letter-spacing: 4px
+  font-size: 14px
+  z-index: 3
+  cursor: pointer
+  border: none
+  background: transparent
+  box-shadow: none
+  text-transform: uppercase
+  transition: all .3s ease-in
+  -moz-transition: all .3s ease-in
+  -webkit-transition: all .3s ease-in
+  -ms-transition: all .3s ease-in
+
+@media (min-width: 850px) and (max-width: 1060px) 
+:host-context(.navbar-button) button 
+  width: 150px
+
+@media (max-width: 850px) 
+:host-context(.navbar-button) button 
+  font-size: 12px
+  width: 125px
+
+:host-context(.subnavbar-button) button 
+  float: left
+  width: 200px
+  margin: 0 auto
+  height: 100%
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
+  font-family: "Malgun Gothic", serif
+  letter-spacing: 2px
+  font-size: 14px
+  z-index: 3
+  cursor: pointer
+  border: none
+  background: transparent
+  box-shadow: none
+  color: black
+  transition: all .3s ease-in
+  text-transform: uppercase
+  -moz-transition: all .3s ease-in
+  -webkit-transition: all .3s ease-in
+  -ms-transition: all .3s ease-in
+
+:host-context(.navbar-play-button) button 
+  float: left
+  width: 200px
+  margin: 0 auto
+  height: 100%
+  border: none
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  background: transparent
+  -webkit-box-pack: center
+  -ms-flex-pack: center
+  justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
+  font-family: "Malgun Gothic", serif
+  font-size: 43px
+  z-index: 3
+  cursor: pointer
+  font-weight: 600
+  box-shadow: none
+  //color: #FFC100
+  text-transform: uppercase
+  transition: all .3s ease-in
+  -moz-transition: all .3s ease-in
+  -webkit-transition: all .3s ease-in
+  -ms-transition: all .3s ease-in
+  -webkit-transform: scale(1)
+  transform: scale(1)
+
+  -webkit-animation: color-change 3s infinite
+  -moz-animation: color-change 3s infinite
+  -o-animation: color-change 3s infinite
+  -ms-animation: color-change 3s infinite
+  animation: color-change 3s infinite
+
+:host-context(.subnavbar-button) button:hover 
+  color: gray
+
+:host-context(.navbar-play-button) button:hover 
+  -webkit-transform: scale(1.1)
+  transform: scale(1.1)
+
+@-webkit-keyframes color-change
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+  50%
+    -webkit-transform: scale(1.05)
+    transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+
+@-moz-keyframes color-change
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+  50%
+    -webkit-transform: scale(1.05)
+    transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+
+@-ms-keyframes color-change
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+  50%
+    -webkit-transform: scale(1.05)
+    transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+
+@-o-keyframes color-change
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+  50%
+    -webkit-transform: scale(1.05)
+    transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+
+@keyframes color-change
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+  50%
+    -webkit-transform: scale(1.05)
+    transform: scale(1.05)
+  100%
+    -webkit-transform: scale(1)
+    transform: scale(1)

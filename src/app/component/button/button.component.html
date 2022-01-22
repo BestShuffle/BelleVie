@@ -1,0 +1,6 @@
+<button mat-raised-button class="{{classes}}" [class.mid-width]="midWidth" [class.disabled]="disabled" *ngIf="!icon" [type]="type || 'button'" [routerLink]="routerLink" [disabled]="disabled">
+  <ng-content></ng-content>
+</button>
+<button mat-icon-button *ngIf="icon">
+  <mat-icon>{{icon}}</mat-icon>
+</button>

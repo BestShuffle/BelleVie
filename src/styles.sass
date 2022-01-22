@@ -1,0 +1,238 @@
+$primaryColor: #287265
+
+html, body
+  height: 100%
+  box-sizing: border-box
+  margin: 0
+
+body
+  margin: 0
+  //font-family: Roboto, "Helvetica Neue", sans-serif
+
+df-messenger
+  --df-messenger-bot-message: #878fac
+  --df-messenger-button-titlebar-color: #287265
+  --df-messenger-chat-background-color: #fafafa
+  --df-messenger-font-color: white
+  --df-messenger-send-icon: #287265
+  --df-messenger-user-message: #479b3d
+
+$color-border-size: 3px
+$toolbar-height: 60px
+$formula-padding: 20px
+.fullscreen-container
+  position: absolute
+  z-index: 9998
+  width: 100%
+  height: calc(100% - #{$toolbar-height})
+  top: $toolbar-height
+
+.fullscreen
+  position: absolute
+  z-index: 9999
+  width: calc(100% - #{$color-border-size * 2})
+  height: calc(100% - #{$toolbar-height})
+  top: $toolbar-height
+  left: 0
+
+.animed-fullscreen
+  position: absolute
+  z-index: 9999
+  border-radius: 12px !important
+  width: calc(100% - #{$formula-padding * 2} - #{$color-border-size * 2})
+  height: calc(100% - #{$formula-padding * 2} - #{$color-border-size * 2})
+  top: $formula-padding
+  left: $formula-padding
+  animation-name: anim-fullscreen
+  animation-duration: .5s
+  transition: all .2s ease-in-out
+
+.animed-opacity-in
+  opacity: 1
+  animation-name: anim-opacity-in
+  animation-duration: .3s
+
+.animed-opacity-out
+  opacity: 0
+  animation-name: anim-opacity-out
+  animation-duration: .3s
+
+@keyframes anim-fullscreen
+  0%
+    top: 50%
+    left: 50%
+    width: 0
+    height: 0
+  90%
+    border-radius: 10%
+  100%
+    top: $formula-padding
+    left: $formula-padding
+    width: calc(100% - #{$formula-padding * 2} - #{$color-border-size * 2})
+    height: calc(100% - #{$formula-padding * 2} - #{$color-border-size * 2})
+
+@keyframes anim-opacity-in
+  0%
+    opacity: .25
+  100%
+    opacity: 1
+
+
+@keyframes anim-opacity-out
+  0%
+    opacity: 1
+  100%
+    opacity: 0
+
+.hidden
+  display: none
+
+.uppercase
+  text-transform: uppercase
+
+.bold
+  font-weight: bold
+
+.orange
+  color: #ee8100
+
+.dark-gray
+  color: darkgray
+
+.gray
+  color: #cacaca
+
+.green
+  color: #4C8A3E
+
+.blue
+  color: #0082cf
+
+.yellow
+  color: #cca73b
+
+.purple
+  color: #b4005f
+
+.beige
+  color: #ecc19f
+
+.prune
+  color: #8a4363
+
+.white
+  color: #ffffff
+
+.red
+  color: #ba1f0a
+
+.border-orange
+  border: $color-border-size solid #ee8100
+
+.border-gray
+  border: $color-border-size solid #cacaca
+
+.border-green
+  border: $color-border-size solid #4C8A3E
+
+.border-blue
+  border: $color-border-size solid #0082cf
+
+.border-yellow
+  border: $color-border-size solid #cca73b
+
+.border-purple
+  border: $color-border-size solid #b4005f
+
+.border-beige
+  border: $color-border-size solid #ecc19f
+
+.border-prune
+  border: $color-border-size solid #8a4363
+
+.border-white
+  border: $color-border-size solid #ffffff
+
+.border-red
+  border: $color-border-size solid #ba1f0a
+
+.back-orange
+  background-color: #ee8100
+
+.back-gray
+  background-color: #dbdbdb
+
+.back-green
+  background-color: #4C8A3E
+
+.back-blue
+  background-color: #0082cf
+
+.back-yellow
+  background-color: #cca73b
+
+.back-purple
+  background-color: #b4005f
+
+.back-beige
+  background-color: #ecc19f
+
+.back-prune
+  background-color: #8a4363
+
+.back-white
+  background-color: #ffffff
+
+.back-red
+  background-color: #ba1f0a
+
+.blur
+  filter: blur(1px)
+
+.full-width
+  width: 100%
+
+.green .mat-progress-bar-fill::after
+  background-color: #4C8A3E
+
+
+.back-primary
+  background-color: #287265
+
+.primary
+  color: $primaryColor
+
+.padding-30
+  padding: 30px
+
+.margin-right-20
+  margin-right: 20px
+.margin-right-30
+  margin-right: 30px
+.margin-top-20
+  margin-top: 20px
+.margin-top-30
+  margin-top: 30px
+
+.font-size-10
+  font-size: 10px
+.font-size-12
+  font-size: 12px
+.font-size-14
+  font-size: 14px
+.font-size-16
+  font-size: 16px
+.font-size-18
+  font-size: 18px
+.font-size-20
+  font-size: 20px
+.font-size-22
+  font-size: 22px
+.font-size-24
+  font-size: 24px
+.font-size-26
+  font-size: 26px
+.font-size-28
+  font-size: 28px
+.font-size-30
+  font-size: 30px

@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline">
+  <mat-label *ngIf="label">{{label}}</mat-label>
+  <input *ngIf="formControl" matInput [name]="name" (input)="change($event)" [type]="type" [minLength]="minLength" [maxLength]="maxLength" [value]="value"
+         [required]="required" [disabled]="disabled" [readonly]="readonly"
+         [formControl]="formControl">
+  <input *ngIf="!formControl" matInput [name]="name" (input)="change($event)" [type]="type" [minLength]="minLength" [maxLength]="maxLength" [value]="value"
+         [required]="required" [disabled]="disabled" [readonly]="readonly">
+  <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.required && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">Ce champ est obligatoire</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.email && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">Veuillez saisir une adresse mail valide</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.minlength && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">La longueur doit être d'au moins {{minLength}} caractère(s)</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.maxLength && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">La longueur doit être au maximum de {{minLength}} caractère(s)</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.notSame && formControl.errors.notSame.mail && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">{{formControl.errors.notSame.mail.errorMessage}}</mat-error>
+  <mat-icon id="icon" matPrefix *ngIf="icon">{{icon}}</mat-icon>
+</mat-form-field>

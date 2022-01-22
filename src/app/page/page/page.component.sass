@@ -1,0 +1,73 @@
+@import ../../style/main/main.component
+
+.slider
+  //position: absolute
+  z-index: 1
+  top: 0
+  width: 100%
+  height: $slider-height
+  margin-top: -$navbar-height
+  -webkit-background-size: 100% auto
+  -moz-background-size: 100% auto
+  -o-background-size: 100% auto
+  background-size: 100% auto
+  background-repeat: no-repeat
+  display: flex
+  align-items: center
+  justify-content: center
+
+.slogan
+  //position: absolute
+  //z-index: 5
+  color: white
+  font-family: 'Raleway ExtraLight', serif
+  font-style: italic
+  font-size: 90px
+  text-shadow: 4px 4px 2px rgba(255, 255, 255, 1)
+
+
+.main-container
+  //position: relative
+  display: flex
+  //width: 100%
+  max-width: 1240px
+  margin: auto
+  // 64px = default size of the navbar
+  //top: $navbar-height
+  min-height: calc(100vh - #{$navbar-height} - #{$padding-footer * 2} - #{$height-footer})
+
+.after-slider
+  min-height: calc(100% - #{$slider-height})
+  top: $slider-height
+
+
+.button, .top-right
+  position: absolute
+  top: 0
+  right: 0
+  margin-right: 30px
+  margin-top: 10px
+
+@media screen and (max-width: 1000px)
+  .slider
+    height: 450px
+@media screen and (max-width: 900px)
+  .slider
+    height: 350px
+@media screen and (max-width: 800px)
+  .slider
+    height: 300px
+@media screen and (max-width: 600px)
+  .slider
+    height: 200px
+@media screen and (max-width: 400px)
+  .slider
+    height: 150px
+@media screen and (max-width: 300px)
+  .slider
+    height: 100px
+
+@media screen and (min-width: 1000px)
+  .main-container
+    //left: 50%
+    //transform: translate(-50%, 0)

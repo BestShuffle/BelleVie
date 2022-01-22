@@ -1,0 +1,9 @@
+<ng-container *ngIf="slider && slider.indexOf('undefined') === -1">
+  <div class="slider" [style.background-image]="'linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('+slider+')'">
+    <span *ngIf="slogan" class="slogan">{{ slogan }}</span>
+  </div>
+</ng-container>
+
+<div class="main-container" [class.full-width]="fullWidth !== undefined" [class.after-slider]="slider && slider.indexOf('undefined') === -1">
+  <ng-content></ng-content>
+</div>

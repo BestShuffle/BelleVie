@@ -1,0 +1,26 @@
+<app-page fullWidth>
+  <ng-container *ngIf="product">
+    <div class="product">
+      <div>
+        <ng-container *ngIf="product.picture && product.picture.indexOf('undefined') === -1">
+          <img mat-card-image class="picture" [src]="'data:image/jpeg;base64,' + product.picture"
+               [alt]="product.label">
+        </ng-container>
+      </div>
+      <div class="specs">
+        <p class="producer">{{ product.producer }}</p>
+        <p class="name">{{ product.label }}</p>
+        <p class="description">{{ product.description }}</p>
+        <p class="price">{{ product.price | currency }}</p>
+        <p class="price-specs" *ngIf="product.volume || product.weight">Prix au {{ product.volume ? 'litre' : 'kilo' }}
+          : {{ product.price / (product.volume ? product.volume : product.weight) | currency }}
+          /{{ product.volume ? 'l' : 'kg' }}</p>
+        <app-field-quantity (valueChange)="onValueChange($event)"></app-field-quantity>
+      <button mat-button class="add-cart white back-primary" (click)="onClickAddToCart($event)">
+        <mat-icon>add_shopping_cart</mat-icon>
+        Ajouter au panier
+      </button>
+    </div>
+    </div>
+  </ng-container>
+</app-page>

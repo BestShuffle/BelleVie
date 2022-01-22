@@ -1,0 +1,252 @@
+<app-page fullWidth>
+  <div class="main-container">
+    <form #formCart>
+      <div class="stepper">
+        <mat-horizontal-stepper linear #stepper>
+          <!-- Icon overrides. -->
+          <ng-template matStepperIcon="cart">
+            <mat-icon>shopping_cart</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="address">
+            <mat-icon>home</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="payment">
+            <mat-icon>payment</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="confirm">
+            <mat-icon>done</mat-icon>
+          </ng-template>
+
+          <mat-step [label]="labelPanier" [optional]="false" state="cart">
+            <div class="step-container">
+              <div class="cart-container">
+                <div class="cart-lines-container">
+                  <div class="title primary">Mon panier</div>
+                  <div class="primary"></div>
+                  <span *ngIf="!cartLines || cartLines.length === 0">Votre panier est vide.</span>
+                  <table mat-table *ngIf="cartLines && cartLines.length > 0" [dataSource]="cartLines"
+                         class="mat-elevation-z8">
+                    <ng-container matColumnDef="delete">
+                      <th mat-header-cell *matHeaderCellDef> Supp.</th>
+                      <td mat-cell *matCellDef="let element">
+                        <mat-icon (click)="onDelete(element.product, element.qte)">close</mat-icon>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="photo">
+                      <th mat-header-cell *matHeaderCellDef> Articles</th>
+                      <td mat-cell *matCellDef="let element" (click)="onClickOpenProduct(element.product)"><img
+                        [src]="'data:image/jpeg;base64,' + element.product.picture" *ngIf="element.product.picture"
+                        alt="article">
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="article">
+                      <th mat-header-cell *matHeaderCellDef></th>
+                      <td mat-cell *matCellDef="let element" (click)="onClickOpenProduct(element.product)">
+                        <span>{{element.product.label}}</span></td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="quantity">
+                      <th mat-header-cell *matHeaderCellDef> Quantité</th>
+                      <td mat-cell *matCellDef="let element">
+                        <app-field-quantity [value]="element.qte"
+                                            (valueChange)="onQuantityChange($event, element.product, element.qte)"></app-field-quantity>
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="total">
+                      <th mat-header-cell *matHeaderCellDef> Total</th>
+                      <td mat-cell *matCellDef="let element"> {{(element.product.price * element.qte) | currency}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                </div>
+                <div class="recap-container">
+                  <div class="recap">
+                    <div class="title primary">
+                      <mat-icon>assignment</mat-icon>
+                      Mon récapitulatif
+                    </div>
+                    <div class="subtotal-label dark-gray">Sous-total :<span
+                      class="subtotal">{{subtotal | currency}}</span>
+                    </div>
+                    <hr class="divider primary">
+                    <div class="total-label primary">Total :<span class="total">{{total | currency}}</span></div>
+                    <app-button class="full-width primary" (click)="onClickConfirmCart(stepper)"
+                                [disabled]="!cartLines || cartLines.length === 0">Valider mon panier
+                    </app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step [label]="labelLivraison" [optional]="false" state="address">
+            <div class="step-container">
+              <app-button midWidth (click)="onClickBack(stepper)">Retour</app-button>
+              <div class="title primary">Adresse de livraison</div>
+              <mat-card class="address-container font-size-16">
+                <div *ngIf="account">
+                  <div class="bold">{{ account.lastName }} {{ account.firstName }}</div>
+                  <div *ngIf="account.society">{{ account.society }}</div>
+                  <div>{{ account.address }}</div>
+                  <div *ngIf="account.addressComp">{{ account.addressComp }}</div>
+                  <div>{{ account.postal }} {{ account.city }}</div>
+                  <div>{{ account.country }}</div>
+                  <div>{{ getPhone() }}</div>
+                </div>
+                <div>
+                  <app-button (click)="onClickEditAddress()">Modifier</app-button>
+                </div>
+              </mat-card>
+              <div>
+                <app-button midWidth class="primary" (click)="onClickConfirmAddress(stepper)">Valider</app-button>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step [label]="labelPaiement" [optional]="false" state="payment">
+            <div class="payment-container step-container">
+              <app-button midWidth (click)="onClickBack(stepper)">Retour</app-button>
+              <div class="addresses-container">
+                <div class="address">
+                  <div class="title primary">Adresse de livraison</div>
+                  <mat-card class="address-container font-size-16">
+                    <div *ngIf="account">
+                      <div class="bold">{{ account.lastName }} {{ account.firstName }}</div>
+                      <div *ngIf="account.society">{{ account.society }}</div>
+                      <div>{{ account.address }}</div>
+                      <div *ngIf="account.addressComp">{{ account.addressComp }}</div>
+                      <div>{{ account.postal }} {{ account.city }}</div>
+                      <div>{{ account.country }}</div>
+                      <div>{{ getPhone() }}</div>
+                    </div>
+                    <div>
+                      <app-button (click)="onClickEditAddress()">Modifier</app-button>
+                    </div>
+                  </mat-card>
+                </div>
+                <div class="address">
+                  <div class="title primary">Adresse de facturation</div>
+                  <mat-card class="address-container font-size-16">
+                    <div *ngIf="account">
+                      <div class="bold">{{ account.lastName }} {{ account.firstName }}</div>
+                      <div *ngIf="account.society">{{ account.society }}</div>
+                      <div>{{ account.address }}</div>
+                      <div *ngIf="account.addressComp">{{ account.addressComp }}</div>
+                      <div>{{ account.postal }} {{ account.city }}</div>
+                      <div>{{ account.country }}</div>
+                      <div>{{ getPhone() }}</div>
+                    </div>
+                    <div>
+                      <app-button (click)="onClickEditAddress()">Modifier</app-button>
+                    </div>
+                  </mat-card>
+                </div>
+              </div>
+              <div class="payment-choice-container">
+                <mat-radio-group (change)="onPaymentSelect($event)" #radioChoicePayment>
+                  <mat-radio-button class="payment-choice-radio-button" value="cb">
+                    <mat-card class="payment-choice">
+                      <div class="choice-img-container"><img src="/assets/img/cards.png"/></div>
+                      <div class="uppercase">Carte bancaire</div>
+                    </mat-card>
+                  </mat-radio-button>
+                  <mat-radio-button class="payment-choice-radio-button" value="pp">
+                    <mat-card class="payment-choice">
+                      <div class="choice-img-container"><img src="/assets/img/paypal.png"/></div>
+                      <div class="uppercase">PayPal</div>
+                    </mat-card>
+                  </mat-radio-button>
+                  <mat-radio-button class="payment-choice-radio-button" value="vr">
+                    <mat-card class="payment-choice">
+                      <div class="choice-img-container"><img src="/assets/img/virement.png"/></div>
+                      <div class="uppercase">Virement bancaire</div>
+                    </mat-card>
+                  </mat-radio-button>
+                </mat-radio-group>
+                <ng-container [ngSwitch]="paymentChoice">
+                  <ng-container *ngSwitchCase="'cb'">
+                    <mat-card>
+                      <h3>Le débit sera effectif au moment de l'expédition.</h3>
+                      <app-field-text #cardOwner label="Titulaire de la carte" type="text"></app-field-text>
+                      <app-field-text #cardNumber label="Numéro de carte" type="text"></app-field-text>
+                      <app-field-text #cardExpireDate label="Date d'expiration" type="date"></app-field-text>
+                      <app-field-text #cardCrypto label="Cryptogramme" type="text" maxLength="3"></app-field-text>
+                    </mat-card>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'pp'">
+                    <mat-card>
+                      <h3>Vous serez redirigé vers le site PayPal afin de valider votre paiement.</h3>
+                    </mat-card>
+                  </ng-container>
+                  <ng-container *ngSwitchCase="'vr'">
+                    <mat-card>
+                      <h3>Les instructions concernant le virement bancaire à réaliser vous seront transmises par
+                        courriel après validation de votre commande. Votre commande ne sera définitivement validée par
+                        nos services qu'après réception du virement sur notre compte bancaire.</h3>
+                    </mat-card>
+                  </ng-container>
+                </ng-container>
+              </div>
+              <div>
+                <mat-checkbox #checkboxCGV checked="true">J'accepte les <a href="https://google.com/">conditions générales de
+                  ventes</a></mat-checkbox>
+                <app-button midWidth class="primary" [disabled]="!this.isAddressOk()" (click)="onClickConfirmPayment(stepper)">Valider ma commande
+                </app-button>
+              </div>
+            </div>
+          </mat-step>
+          <mat-step [label]="labelConfirmation" [optional]="false" state="confirm">
+            <div><h1>Votre commande a été validée.</h1></div>
+
+
+            <div id="pdfContainer" class="transparent padding-30">
+              <img src="../../../assets/img/favicon.png" height="100" />
+              <h1 style="padding-top: 50px;">Récapitulatif de votre commande</h1>
+              <h2>Paiement effectué le : {{today}}</h2>
+              <table mat-table *ngIf="cartLines && cartLines.length > 0" [dataSource]="cartLines"
+                     class="mat-elevation-z8">
+                <ng-container matColumnDef="photo">
+                  <th mat-header-cell *matHeaderCellDef> Articles</th>
+                  <td mat-cell *matCellDef="let element" (click)="onClickOpenProduct(element.product)"><img
+                    [src]="'data:image/jpeg;base64,' + element.product.picture" *ngIf="element.product.picture"
+                    alt="article">
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="article">
+                  <th mat-header-cell *matHeaderCellDef></th>
+                  <td mat-cell *matCellDef="let element" (click)="onClickOpenProduct(element.product)">
+                    <span>{{element.product.label}}</span></td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell *matHeaderCellDef> Quantité</th>
+                  <td mat-cell *matCellDef="let element">{{element.qte}}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="total">
+                  <th mat-header-cell *matHeaderCellDef> Total</th>
+                  <td mat-cell *matCellDef="let element"> {{(element.product.price * element.qte) | currency}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['photo', 'article', 'quantity', 'total']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['photo', 'article', 'quantity', 'total'];"></tr>
+              </table>
+              <div class="subtotal margin-top-20"><h2>Total : {{total | currency}}</h2></div>
+            </div>
+
+            <div><app-button (click)="downloadAsPDF()">Télécharger la facture</app-button></div>
+          </mat-step>
+
+
+        </mat-horizontal-stepper>
+      </div>
+    </form>
+
+
+  </div>
+</app-page>

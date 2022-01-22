@@ -1,0 +1,61 @@
+@import ../page/page.component
+
+$sidebar-width: 300px
+
+.sidebar-container
+  //background-color: gray
+  border-right: 1px solid rgba(0,0,0,.1)
+  position: sticky
+  width: $sidebar-width
+  min-height: calc(100%- #{$slider-height})
+  padding-top: 50px
+  padding-left: 50px
+
+.right-container
+  padding: 20px
+  min-height: calc(100%- #{$slider-height})
+  width: calc(100% - 250px)
+
+.product
+  display: flex
+  flex-direction: column
+  align-items: center
+  text-align: center
+  //font-family: 'Raleway SemiBold', serif
+  //line-height: .75
+  width: 60%
+  //height: 80%
+
+  .mat-card-actions
+    //width: 100%
+    display: flex
+
+  .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button
+    min-width: 30px
+    padding: 0
+    line-height: 30px
+  .add-cart
+    width: 30px
+    height: 30px
+  .picture
+    cursor: pointer
+    margin-top: 8px
+    //width: 50%
+
+  .producer
+    font-size: 12px
+  .name
+    font-weight: 500
+    cursor: pointer
+  .price
+    font-size: 18px
+    //line-height: 1.5
+    font-weight: 500
+    .details
+        font-weight: lighter
+        font-size: 16px
+
+
+@media (max-width: 1050px)
+  .right-container
+    width: 100%

@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ng-container *ngFor="let element of formConfig">
+    <ng-container [ngSwitch]="element.type">
+      <ng-container *ngSwitchCase="'area'">
+        <app-field-text-area [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                             [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                             [readonly]="element.readonly" [icon]="element.icon" [minLength]="element.minLength"
+                             [required]="element.required" [form]="form"></app-field-text-area>
+      </ng-container>
+      <ng-container *ngSwitchCase="'select'">
+        <app-field-select [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                          [label]="element.label" [disabled]="element.disabled" [icon]="element.icon"
+                          [required]="element.required" [form]="form" [options]="element.options">
+
+        </app-field-select>
+      </ng-container>
+      <ng-container *ngSwitchCase="'checkbox'">
+        <app-field-checkbox [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                            [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                            [readonly]="element.readonly" [labelPosition]="element.labelPosition"
+                            [form]="form"></app-field-checkbox>
+      </ng-container>
+      <ng-container *ngSwitchCase="'tel'">
+        <app-field-text [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                        [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                        [type]="element.type" [readonly]="element.readonly" [icon]="element.icon"
+                        [minLength]="element.minLength" [required]="element.required"
+                        [form]="form"></app-field-text>
+      </ng-container>
+      <ng-container *ngSwitchCase="'text'">
+        <app-field-text [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                        [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                        [type]="element.type" [readonly]="element.readonly" [icon]="element.icon"
+                        [minLength]="element.minLength" [required]="element.required"
+                        [form]="form"></app-field-text>
+      </ng-container>
+      <ng-container *ngSwitchCase="'email'">
+        <app-field-text [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                        [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                        [type]="element.type" [readonly]="element.readonly" icon="email" email
+                        [minLength]="element.minLength" [required]="element.required"
+                        [form]="form"></app-field-text>
+      </ng-container>
+      <ng-container *ngSwitchCase="'number'">
+        <app-field-text [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                        [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                        [type]="element.type" [readonly]="element.readonly" [icon]="element.icon"
+                        [minLength]="element.minLength" [required]="element.required"
+                        [form]="form"></app-field-text>
+      </ng-container>
+      <ng-container *ngSwitchCase="'password'">
+        <app-field-password [name]="element.name" [class.colored]="colored" [formControlName]="element.name"
+                            [label]="element.label" [value]="element.value" [disabled]="element.disabled"
+                            [readonly]="element.readonly" [required]="element.required"
+                            [form]="form"></app-field-password>
+      </ng-container>
+      <ng-container *ngSwitchCase="'recaptcha'">
+        <re-captcha [formControlName]="element.name" required></re-captcha>
+      </ng-container>
+      <ng-container *ngSwitchCase="'button'">
+        <app-button [class.small]="element.small" [class.full-width]="element.fullWidth" [class.colored]="colored"
+                    [class.transparent]="element.transparent" [routerLink]="element.routerLink"
+                    (click)="onClickButton(element)" type="button">
+          {{element.value}}
+        </app-button>
+      </ng-container>
+      <ng-container *ngSwitchCase="'submit'">
+        <app-button [class.small]="element.small" [class.full-width]="element.fullWidth" [class.colored]="colored"
+                    [class.transparent]="element.transparent" [routerLink]="element.routerLink"
+                    (click)="onClickButton(element)" type="submit">
+          {{element.value}}
+        </app-button>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</form>

@@ -1,0 +1,34 @@
+<ng-container *ngIf="collection">
+  <app-page fullWidth [slider]="'data:image/jpeg;base64,' + collection.picture" [slogan]="collection.label">
+    <div class="sidebar-container" [class.hidden]="isSidebarHidden">
+<!--      <p>Filtre 1</p>-->
+<!--      <p>Filtre 2</p>-->
+    </div>
+
+    <div class="right-container">
+      <mat-grid-list [cols]="cols" [rowHeight]="rowHeight" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let product of collection.products">
+          <mat-card class="product">
+            <img mat-card-image class="picture" (click)="onClickProduct(product)" *ngIf="product.picture"
+                 [src]="'data:image/jpeg;base64,' + product.picture"
+                 [alt]="product.label">
+
+            <mat-card-content>
+              <p class="producer" (click)="onClickProduct(product)">{{ product.producer }}</p>
+              <p class="name" (click)="onClickProduct(product)">{{ product.label }}</p>
+              <p class="price">{{ product.price | currency }} <span
+                class="details" *ngIf="product.volume || product.weight">({{ product.price / (product.volume ? product.volume : product.weight) | currency }}
+                /{{ product.volume ? 'l' : 'kg' }})</span></p>
+            </mat-card-content>
+            <mat-card-actions>
+              <app-field-quantity (valueChange)="onValueChange($event, product)"></app-field-quantity>
+              <button mat-button class="add-cart white back-primary" (click)="onClickAddToCart($event, product)">
+                <mat-icon>add_shopping_cart</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </app-page>
+</ng-container>

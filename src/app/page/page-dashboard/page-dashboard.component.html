@@ -1,0 +1,22 @@
+<app-page>
+  <div class="dashboard-container padding-30 margin-top-30">
+    <app-button class="button full-width" (click)="onClickEditPassword($event)">Mettre à jour le mot de passe
+    </app-button>
+    <div class="infos-container">
+      <div id="details">
+        <div class="title-container">
+          <h1 class="title">Informations personnelles</h1>
+          <app-button (click)="onClickEditInfos($event)">Modifier</app-button>
+        </div>
+        <app-dynamic-form #formInfos *ngIf="formDataInfos" [formConfig]="formDataInfos"></app-dynamic-form>
+      </div>
+      <div id="address">
+        <div class="title-container">
+          <h1 class="title">Adresse</h1>
+          <app-button (click)="onClickEditAddress($event)">Modifier</app-button>
+        </div>
+        <app-dynamic-form #formAddress *ngIf="formDataAddress" [formConfig]="formDataAddress"></app-dynamic-form>
+      </div>
+    </div>
+  </div>
+</app-page>

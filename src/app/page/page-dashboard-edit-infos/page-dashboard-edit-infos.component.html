@@ -1,0 +1,10 @@
+<app-page>
+  <div class="padding-30 margin-top-30">
+    <app-button class="button" (click)="onClickBack($event)">Retour</app-button>
+    <app-button class="full-width" (click)="onClickEditPassword($event)">Mettre à jour le mot de passe</app-button>
+    <div class="message-success" *ngIf="messageSuccess">{{ messageSuccess }}</div>
+    <div class="message-hint" *ngIf="messageHint">{{ messageHint }}</div>
+    <div class="message-error" *ngIf="messageError">{{ messageError }}</div>
+    <app-dynamic-form #form *ngIf="formData" [formConfig]="formData"></app-dynamic-form>
+  </div>
+</app-page>

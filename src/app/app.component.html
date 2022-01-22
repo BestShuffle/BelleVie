@@ -1,0 +1,46 @@
+<div id="body-container">
+  <mat-toolbar class="header" [class.transparent]="isNavbarTransparent">
+    <div>
+      <ng-container *ngIf="collections">
+        <button *ngFor="let collection of collections" mat-button
+                (click)="onClickCollection(collection)">{{collection.label}}</button>
+
+        <!--      <mat-menu #menu="matMenu">-->
+        <!--        <button mat-menu-item>Item 1</button>-->
+        <!--        <button mat-menu-item>Item 2</button>-->
+        <!--      </mat-menu>-->
+      </ng-container>
+    </div>
+    <div class="logo-container">
+      <div class="logo" (click)="onClickHome($event)" alt="logo"></div>
+    </div>
+    <div>
+      <button mat-icon-button aria-label="Mon compte" *ngIf="serviceAccount.isLoggedIn()"
+              (click)="onClickDashboard($event)">
+        <mat-icon class="icon-login">person</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Panier" (click)="onClickCart($event)">
+        <mat-icon [matBadge]="cartSize" matBadgeColor="warn" class="icon-login">shopping_cart</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Connexion" *ngIf="serviceAccount.isLoggedOut()"
+              (click)="onClickLogin($event)">
+        <mat-icon class="icon-login">login</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Déconnexion" *ngIf="serviceAccount.isLoggedIn()" (click)="onClickLogout()">
+        <mat-icon class="icon-login">power_settings_new</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+<!--  <div>-->
+    <router-outlet></router-outlet>
+<!--  </div>-->
+
+  <div class="footer back-primary white">
+    <ul>
+      <li><a (click)="onClickAbout($event)">A propos de nous</a></li>
+      <li><a (click)="onClickCGV($event)">Conditions générales de ventes</a></li>
+      <li><a (click)="onClickContactUs($event)">Nous contacter</a></li>
+    </ul>
+  </div>
+</div>

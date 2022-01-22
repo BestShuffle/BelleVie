@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{label}}</mat-label>
+  <mat-select *ngIf="formControl" [formControl]="formControl" [multiple]="multiple" [required]="required" [disabled]="disabled" [ngModel]="value">
+    <mat-option *ngFor="let option of options" [value]="option.id"  [disabled]="option.disabled">{{option.name}}</mat-option>
+  </mat-select>
+  <mat-select *ngIf="!formControl" [multiple]="multiple" [disabled]="disabled" [ngModel]="value" (selectionChange)="selectionChange.emit($event)">
+    <mat-option *ngFor="let option of options" [value]="option.id"  [disabled]="option.disabled">{{option.name}}</mat-option>
+  </mat-select>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.required && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">Ce champ est obligatoire</mat-error>
+  <mat-icon id="icon" matPrefix>{{icon}}</mat-icon>
+</mat-form-field>

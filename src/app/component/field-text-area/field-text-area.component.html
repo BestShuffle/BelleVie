@@ -1,0 +1,11 @@
+<mat-form-field class="container" appearance="outline">
+  <mat-label>{{label}}</mat-label>
+  <textarea matInput [name]="name" (input)="change($event)" [minLength]="minLength" [value]="value"
+            [required]="required" [disabled]="disabled" [readonly]="readonly"
+            [formControl]="formControl">
+  </textarea>
+  <mat-hint>{{hint}}</mat-hint>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.required && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">Ce champ est obligatoire</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.minlength && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">La longueur doit être d'au moins {{minLength}} caractère(s)</mat-error>
+  <mat-icon class="icon" id="icon" matPrefix>{{icon}}</mat-icon>
+</mat-form-field>

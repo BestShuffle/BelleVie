@@ -1,0 +1,9 @@
+<div class="container">
+  <button mat-button class="add-cart white back-primary" (click)="onClickRemove($event)">
+    <mat-icon>remove</mat-icon>
+  </button>
+  <app-field-text class="no-padding no-margin width-45 height-30" name="quantity" type="number" [value]="value" readonly></app-field-text>
+  <button mat-button class="add-cart white back-primary" (click)="onClickAdd($event)">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

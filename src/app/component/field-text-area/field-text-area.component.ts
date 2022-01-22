@@ -1,0 +1,63 @@
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
+
+@Component({
+  selector: 'app-field-text-area',
+  templateUrl: './field-text-area.component.html',
+  styleUrls: ['../../form/form/form.component.sass', './field-text-area.component.sass'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FieldTextAreaComponent),
+      multi: true
+    }
+  ]
+})
+export class FieldTextAreaComponent implements OnInit, ControlValueAccessor {
+  @Input() label: string;
+  @Input() hint: string;
+  @Input() icon: string;
+  @Input() name: string;
+
+  @Input() value: string;
+  @Input() required: boolean;
+  @Input() disabled: boolean;
+  @Input() readonly: boolean;
+
+  @Input() form: FormGroup;
+
+  @Input() minLength: number;
+  formControl: FormControl;
+
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    if (this.form) {
+      this.formControl = (this.form.controls[this.name] as FormControl);
+    }
+  }
+
+  writeValue(newVal: string): void {
+    this.value = newVal;
+  }
+
+  registerOnChange(fn: (v: any) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+  }
+
+  change(e): void {
+    this.onChange(e.target.value);
+    this.onTouched(e.target.value);
+  }
+}

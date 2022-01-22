@@ -1,0 +1,7 @@
+<mat-checkbox [name]="name" [formControl]="formControl"  [labelPosition]="labelPosition" [value]="value" color="primary">
+  <ng-container *ngIf="label">{{label}}</ng-container>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.required && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">Ce champ est obligatoire</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.email && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">Veuillez saisir une adresse mail valide</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.minlength && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">La longueur doit être d'au moins {{minLength}} caractère(s)</mat-error>
+  <mat-error *ngIf="formControl && formControl.errors && formControl.errors.notSame && formControl.errors.notSame.mail && formControl.invalid && ((formControl.dirty && formControl.touched) || form.invalid)">{{formControl.errors.notSame.mail.errorMessage}}</mat-error>
+</mat-checkbox>
